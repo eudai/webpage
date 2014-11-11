@@ -1,7 +1,7 @@
 
 class Section < Element
 
-	def initialize(element,selector)
+	def initialize(element)
 		super
 	end
 

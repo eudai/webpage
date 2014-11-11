@@ -1,8 +1,7 @@
 
 class Element
 
-	def initialize(element,selector)
-		@selector = selector
+	def initialize(element)
 		@element = element
 	end
 
@@ -11,10 +10,12 @@ class Element
 	end
 
 	def clear
+		puts 'clearing element...'
 		@element.clear
 	end
 
 	def click
+		puts 'clicking element...'
 		@element.click
 	end
 
@@ -51,6 +52,7 @@ class Element
 	end
 
 	def send_keys(args)
+		puts 'sending keys to element...'
 		@element.send_keys args
 	end
 
@@ -59,6 +61,7 @@ class Element
 	end
 
 	def submit
+		puts 'submitting...'
 		@element.submit
 	end
 
@@ -76,33 +79,24 @@ class Element
 
 	# End of default selenium element methods
 
+	def native
+		@element
+	end
+
 	def find(selector, type = :css)
-	    begin
-	      element = @element.find_element type.to_s, selector
-	    rescue => e
-	      puts e
-	      false
-	    else
-	      Element.new(element,selector)
-	    end
+		puts "searching for element with the #{type} of #{selector}..."
+        element = @element.native.find_element type, selector
+        puts 'element found.'
+        Element.new(element)
 	end
 
 	def all(selector, type = :css)
+		puts "searching for elements with the #{type} of #{selector}..."
 	    elements_array = []
-	    begin
-	    	elements = @element.find_elements type.to_sym, selector
-	    rescue
-	    	puts "failed to find any elements with the #{type.to_s} of #{selector}"
-	    else
-	    	elements.each {|e|elements_array << Element.new(e,selector)}
-	    end
+	    elements = @element.native.find_elements type.to_sym, selector
+	    elements.each {|e|elements_array << Element.new(e,selector)}
+	    puts "#{elements.size} elements found."
 	    elements_array
-	end
-
-	def section(name, class_name, selector)
-	    define_method name.to_s do
-	      	class_name.new(find selector,selector)
-	    end
 	end
 
 	def exists?
@@ -127,15 +121,11 @@ class Element
 	end
 
 	def selector
-		@element.attribute 'css'
+		@element.tag_name
 	end
 
 	def value
 		@element.attribute 'value'
-	end
-
-	def class
-		@element.attribute 'class'
 	end
 
 	def selector
@@ -145,9 +135,5 @@ class Element
 	def [](attribute)
 		@element.attribute attribute
 	end	
-
-	def native
-		@element
-	end
 	
 end

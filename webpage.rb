@@ -1,10 +1,11 @@
 
-require 'selenium-webdriver'
-require './browser'
-require './element'
-require './page'
-require './section'
-require './finder'
+root = File.expand_path('..', __FILE__)
+
+load root + '/browser.rb'
+load root + '/element.rb'
+load root + '/finder.rb'
+load root + '/page.rb'
+load root + '/section.rb'
 
 include Finder
 
@@ -14,8 +15,15 @@ class Webpage
 	include Page
 
 	def initialize(browser = :chrome)
-		puts "launching webdriver for #{browser.to_s}..."
-		@webpage = Selenium::WebDriver.for browser.to_sym
+		unless $webpage
+			puts "launching webdriver for #{browser.to_s}..."
+			$webpage = Selenium::WebDriver.for browser.to_sym
+			puts "webdriver loaded."
+		end
+	end
+
+	def page
+		$webpage
 	end
 
 end
