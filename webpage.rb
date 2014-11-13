@@ -13,20 +13,20 @@ include Finder
 
 class Webpage
 
-	include Browser
-	include Page
+    include Browser
+    include Page
 
-	def initialize(browser = :chrome)
-		unless $webpage
-			puts "launching webdriver for #{browser.to_s}..."
-			$webpage = Selenium::WebDriver.for browser.to_sym
-			puts "webdriver loaded."
-		end
-	end
+    def initialize(browser = :chrome)
+        unless $webpage
+            puts "launching webdriver for #{browser.to_s}..."
+            $webpage = Selenium::WebDriver.for browser.to_sym
+            puts "webdriver loaded."
+        end
+    end
 
-	def page
-		$webpage
-	end
+    def page
+        $webpage
+    end
 
 end
 
