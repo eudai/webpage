@@ -1,20 +1,20 @@
 
 module Browser
 
-	def visit(url)
-    	url = 'https://' + url unless url.include? 'http'
+    def visit(url)
+        url = 'https://' + url unless url.include? 'http'
         puts "visiting '#{url}'..."
-    	page.navigate.to url unless current_url == url
-  	end
+        page.navigate.to url unless current_url == url
+    end
 
-  	def current_url
-    	page.current_url
-  	end
+    def current_url
+        page.current_url
+    end
 
-	def refresh
-		puts 'refreshing page...'
-    	page.navigate.refresh
-  	end
+    def refresh
+        puts 'refreshing page...'
+        page.navigate.refresh
+    end
 
   	def back
   		puts 'navigating back...'
@@ -27,18 +27,18 @@ module Browser
   	end
 
   	def maximize
-    	puts 'maximizing window...'
-    	page.manage.window.maximize
+        puts 'maximizing window...'
+        page.manage.window.maximize
   	end
 
 	def move(x,y)
-	    puts "moving window to '#{x}, #{y}'..."
-	    page.manage.window.move_to x, y
+        puts "moving window to '#{x}, #{y}'..."
+        page.manage.window.move_to x, y
 	end
 
   	def resize(width,height)
-    	puts "resizing window to '#{width}, #{height}'..."
-    	page.manage.window.resize_to(width,height)
+        puts "resizing window to '#{width}, #{height}'..."
+        page.manage.window.resize_to(width,height)
   	end
 
   	def screenshot(filename)
@@ -47,23 +47,23 @@ module Browser
     end
 
   	def new_tab
-  		puts 'opening new tab...'
+        puts 'opening new tab...'
   	end
 
   	def close_tab(index)
-  		puts "closing tab #{index.to_s}..."
+        puts "closing tab #{index.to_s}..."
   	end
 
   	def close_tab_titled(title)
-  		puts "closing tab tited #{title}..."
+        puts "closing tab tited #{title}..."
   	end
 
   	def switch_to_tab(index)
-  		puts "switching to tab #{index}..."
+        puts "switching to tab #{index}..."
   	end
 
   	def switch_to_tab_titled(title)
-  		puts "switching to tab titled #{title}..."
+        puts "switching to tab titled #{title}..."
   	end
 
   	def alert
@@ -80,8 +80,8 @@ module Browser
     end
 
     def quit
-		puts 'closing webdriver...'
-		page.quit
+        puts 'closing webdriver...'
+        page.quit
     end
 
     def delete_cookie(name)
