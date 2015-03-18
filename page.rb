@@ -2,7 +2,7 @@
 module Page
 
     def find(selector, type = :css)
-        puts 'searching for element with the ' + type.to_s + ' of ' + selector + '...'
+        puts "searching for element with the ${type.to_s} of #{selector}...'"
         element = page.find_element type.to_sym, selector
         puts 'element found.'
         Element.new(element)
@@ -28,7 +28,7 @@ module Page
     end
 
     def within_frame(selector)
-        puts 'swithing to frame: ' + selector
+        puts "swithing to frame: #{selector}"
         page.switch_to.frame selector
         yield
         puts 'returning to default content...'
